@@ -1,0 +1,29 @@
+-- creacion usuario API
+CREATE USER c##testingapi IDENTIFIED BY testingapi ACCOUNT UNLOCK;
+GRANT ALL PRIVILEGES TO c##testingapi;
+
+
+CREATE TABLE tarjeta
+(
+    id INT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+    numero VARCHAR2(16) NOT NULL,
+    pin NUMBER(3) NOT NULL,
+    fecha_valida VARCHAR(4) NOT NULL
+);
+
+CREATE TABLE pago 
+(
+    idPago INT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+    idTarjeta INT NOT NULL,
+    detallePago VARCHAR2(500) NULL,
+    fechaPago DATE NOT NULL,
+    
+    CONSTRAINT fk_idTarjeta 
+        FOREIGN KEY (idTarjeta) 
+        REFERENCES tarjeta (id)
+);
+
+INSERT INTO tarjeta (numero, pin, fecha_valida) VALUES ('1234123412341234', 345, '0822');
+    
+-- DROP TABLE pago;
+-- DROP TABLE tarjeta;

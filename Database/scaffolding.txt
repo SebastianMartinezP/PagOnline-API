@@ -1,0 +1,1 @@
+Scaffold-DbContext "User Id=c##testingapi;Password=testingapi;Data Source=localhost:1521/xe;" Oracle.EntityFrameworkCore -OutputDir Models -Tables "TARJETA", "PAGO" -Force
