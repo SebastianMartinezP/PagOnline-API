@@ -11,13 +11,13 @@ namespace PagOnlineAPI
 
             #region Models >>> DTO
 
-            CreateMap<Models.Tarjeta, DTO.Tarjeta>();
+            CreateMap<Models.ComprobantePago, DTO.ComprobantePago>();
 
             #endregion
 
             #region DTO >>> Models
 
-            CreateMap<DTO.Tarjeta, Models.Tarjeta>();
+            CreateMap<DTO.ComprobantePago, Models.ComprobantePago>();
 
             #endregion
         }

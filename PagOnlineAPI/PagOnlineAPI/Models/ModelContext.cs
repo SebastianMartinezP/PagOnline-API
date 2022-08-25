@@ -2,19 +2,21 @@
 using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
-using Microsoft.Extensions.Options;
 
 namespace PagOnlineAPI.Models
 {
     public partial class ModelContext : DbContext
     {
-        public ModelContext() { }
+        public ModelContext()
+        {
+        }
 
-        public ModelContext(DbContextOptions<ModelContext> options) 
-            : base(options) { }
+        public ModelContext(DbContextOptions<ModelContext> options)
+            : base(options)
+        {
+        }
 
-        public virtual DbSet<Models.Pago> Pagos { get; set; } = null!;
-        public virtual DbSet<Models.Tarjeta> Tarjeta { get; set; } = null!;
+        public virtual DbSet<Models.ComprobantePago> ComprobantePago { get; set; } = null!;
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -26,69 +28,64 @@ namespace PagOnlineAPI.Models
                     .Build();
 
                 optionsBuilder.UseOracle(configuration.GetConnectionString("PagOnlineAPI_Database"));
-                
             }
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.HasDefaultSchema("C##TESTINGAPI")
+            modelBuilder.HasDefaultSchema("C##SECURITY")
                 .UseCollation("USING_NLS_COMP");
 
-            modelBuilder.Entity<Pago>(entity =>
+            modelBuilder.Entity<Models.ComprobantePago>(entity =>
             {
-                entity.HasKey(e => e.Idpago)
-                    .HasName("SYS_C007327");
+                entity.HasKey(e => e.Idcomprobante)
+                    .HasName("SYS_C007679");
 
-                entity.ToTable("PAGO");
+                entity.ToTable("COMPROBANTE_PAGO");
 
-                entity.Property(e => e.Idpago)
+                entity.Property(e => e.Idcomprobante)
                     .HasColumnType("NUMBER(38)")
                     .ValueGeneratedOnAdd()
-                    .HasColumnName("IDPAGO");
+                    .HasColumnName("IDCOMPROBANTE");
 
-                entity.Property(e => e.Detallepago)
-                    .HasMaxLength(500)
-                    .IsUnicode(false)
-                    .HasColumnName("DETALLEPAGO");
-
-                entity.Property(e => e.Fechapago)
+                entity.Property(e => e.Fecharegistro)
                     .HasColumnType("DATE")
-                    .HasColumnName("FECHAPAGO");
+                    .HasColumnName("FECHAREGISTRO");
 
-                entity.Property(e => e.Idtarjeta)
-                    .HasColumnType("NUMBER(38)")
-                    .HasColumnName("IDTARJETA");
-
-                entity.HasOne(d => d.IdtarjetaNavigation)
-                    .WithMany(p => p.Pagos)
-                    .HasForeignKey(d => d.Idtarjeta)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_IDTARJETA");
-            });
-
-            modelBuilder.Entity<Models.Tarjeta>(entity =>
-            {
-                entity.ToTable("TARJETA");
-
-                entity.Property(e => e.Id)
-                    .HasColumnType("NUMBER(38)")
-                    .ValueGeneratedOnAdd()
-                    .HasColumnName("ID");
-
-                entity.Property(e => e.FechaValida)
+                entity.Property(e => e.Fechavalida)
                     .HasMaxLength(4)
                     .IsUnicode(false)
-                    .HasColumnName("FECHA_VALIDA");
+                    .HasColumnName("FECHAVALIDA");
 
-                entity.Property(e => e.Numero)
+                entity.Property(e => e.Monto)
+                    .HasColumnType("NUMBER(38)")
+                    .HasColumnName("MONTO");
+
+                entity.Property(e => e.Numerotarjeta)
                     .HasMaxLength(16)
                     .IsUnicode(false)
-                    .HasColumnName("NUMERO");
+                    .HasColumnName("NUMEROTARJETA");
 
-                entity.Property(e => e.Pin)
+                entity.Property(e => e.Pintarjeta)
                     .HasColumnType("NUMBER(38)")
-                    .HasColumnName("PIN");
+                    .HasColumnName("PINTARJETA");
+
+                entity.Property(e => e.Tipomoneda)
+                    .HasMaxLength(20)
+                    .IsUnicode(false)
+                    .HasColumnName("TIPOMONEDA");
+
+                entity.Property(e => e.Valoruf)
+                    .HasColumnType("NUMBER(10,2)")
+                    .HasColumnName("VALORUF");
+
+                entity.Property(e => e.Valorusd)
+                    .HasColumnType("NUMBER(10,2)")
+                    .HasColumnName("VALORUSD");
+
+                entity.Property(e => e.Valorutm)
+                    .HasColumnType("NUMBER(10,2)")
+                    .HasColumnName("VALORUTM");
             });
 
             OnModelCreatingPartial(modelBuilder);

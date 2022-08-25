@@ -20,7 +20,7 @@ MapperConfiguration mapperConfig = new MapperConfiguration(mc =>
 });
 IMapper mapper = mapperConfig.CreateMapper();
 
-builder.Services.AddSingleton(mapper); 
+builder.Services.AddSingleton(mapper);
 builder.Services.AddMvc();
 
 #endregion
