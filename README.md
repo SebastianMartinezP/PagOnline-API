@@ -8,5 +8,5 @@ API de pago simulado con .NET Core y Oracle 18cXE
  - Automapper
  
 ### Importante:
- - Cambiar la ConnectionString en AppSettings.json
- - API corriendo en localhost:7000
+ - Cambiar la ConnectionString en `AppSettings.json`
+ - Puerto de la API: `localhost:7000` (agregar `/swagger.json` a la ruta en caso de no aparecer interfaz visual.)
