@@ -1,7 +1,11 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using PagOnlineAPI;
+using PagOnlineAPI.DTO;
+using RestSharp;
+using System.Globalization;
 using System.Linq;
+using System.Text.Json;
 
 namespace PagOnlineAPI.Controllers
 {
@@ -48,9 +52,37 @@ namespace PagOnlineAPI.Controllers
         {
             try
             {
-                // IMPORTANTE agregar validaciones!!
-                Models.ComprobantePago cp = _mapper.Map<DTO.ComprobantePago, Models.ComprobantePago>(comprobantePago);
-                _context.ComprobantePago.Add(cp);
+                Models.ComprobantePago comprobante = 
+                    _mapper.Map<DTO.ComprobantePago, Models.ComprobantePago>(comprobantePago);
+
+                if (comprobante.Tipomoneda != null)
+                {
+                    CurrencyExchange currency = new CurrencyExchange();
+                    CurrencyData? data = null;
+
+                    switch (comprobante.Tipomoneda.ToLower())
+                    {
+                        case "uf":
+                            data = currency.GetCurrency("uf");
+                            comprobante.Valoruf = (decimal)(data?.value ?? 0);
+                            break;
+
+                        case "utm":
+                            data = currency.GetCurrency("utm");
+                            comprobante.Valoruf = (decimal)(data?.value ?? 0);
+                            break;
+
+                        case "usd":
+                            data = currency.GetCurrency("dolar");
+                            comprobante.Valoruf = (decimal)(data?.value ?? 0);
+                            break;
+
+                        default:
+                            break;
+                    }
+                }
+
+                _context.ComprobantePago.Add(comprobante);
                 _context.SaveChanges();
 
                 _logger.LogInformation("Comprobante pago generado exitosamente.");
