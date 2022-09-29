@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "nwJLDp2BO/+Kls5Mu+jIw6F+i7hH6lTdAE5kJrst2kOPM5dL/kOMtgncV07d9r9HQgbcMpt46OhzATs3OwUy4g==",
+  "dgSpecHash": "YPMnYEBDJ2cRAxYeIyWUzjpcIeWLMddCOJienYPLL6g3c6o82mTdG8UQJvs7FzEUL8ygIJuhbLUYLq+1wyzIMA==",
   "success": true,
   "projectFilePath": "E:\\DUOC\\Portafolio\\Repositorios\\PagOnline API\\PagOnlineAPI\\PagOnlineAPI\\PagOnlineAPI.csproj",
   "expectedPackageFiles": [
@@ -29,6 +29,7 @@
     "C:\\Users\\Seba\\.nuget\\packages\\microsoft.win32.systemevents\\6.0.0\\microsoft.win32.systemevents.6.0.0.nupkg.sha512",
     "C:\\Users\\Seba\\.nuget\\packages\\oracle.entityframeworkcore\\6.21.61\\oracle.entityframeworkcore.6.21.61.nupkg.sha512",
     "C:\\Users\\Seba\\.nuget\\packages\\oracle.manageddataaccess.core\\3.21.61\\oracle.manageddataaccess.core.3.21.61.nupkg.sha512",
+    "C:\\Users\\Seba\\.nuget\\packages\\restsharp\\108.0.2\\restsharp.108.0.2.nupkg.sha512",
     "C:\\Users\\Seba\\.nuget\\packages\\swashbuckle.aspnetcore\\6.4.0\\swashbuckle.aspnetcore.6.4.0.nupkg.sha512",
     "C:\\Users\\Seba\\.nuget\\packages\\swashbuckle.aspnetcore.swagger\\6.4.0\\swashbuckle.aspnetcore.swagger.6.4.0.nupkg.sha512",
     "C:\\Users\\Seba\\.nuget\\packages\\swashbuckle.aspnetcore.swaggergen\\6.4.0\\swashbuckle.aspnetcore.swaggergen.6.4.0.nupkg.sha512",
