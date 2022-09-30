@@ -65,24 +65,26 @@ namespace PagOnlineAPI.Controllers
                         case "uf":
                             data = currency.GetCurrency("uf");
                             comprobante.Valoruf = (decimal)(data?.value ?? 0);
+                            comprobante.Monto = comprobante.Monto * comprobante.Valoruf;
                             break;
 
                         case "utm":
                             data = currency.GetCurrency("utm");
                             comprobante.Valoruf = (decimal)(data?.value ?? 0);
+                            comprobante.Monto = comprobante.Monto * comprobante.Valorutm;
                             break;
 
                         case "usd":
                             data = currency.GetCurrency("dolar");
                             comprobante.Valoruf = (decimal)(data?.value ?? 0);
+                            comprobante.Monto = comprobante.Monto * comprobante.Valorusd;
                             break;
 
                         default:
                             break;
                     }
-                }
 
-                _context.ComprobantePago.Add(comprobante);
+                    _context.ComprobantePago.Add(comprobante);
                 _context.SaveChanges();
 
                 _logger.LogInformation("Comprobante pago generado exitosamente.");
