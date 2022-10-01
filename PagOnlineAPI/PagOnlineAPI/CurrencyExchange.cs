@@ -22,6 +22,7 @@ namespace PagOnlineAPI
         {
             try
             {
+                setRequestDateTime(indicator);
                 RestClient client = 
                     new RestClient(string.Format(this.sourceUrl, indicator, this.dateTime));
                 RestRequest request = new RestRequest();
@@ -44,6 +45,27 @@ namespace PagOnlineAPI
             {
                 Console.WriteLine(e.Message);
                 return null;
+            }
+        }
+
+        public void setRequestDateTime(string indicator)
+        {
+            List<string> indicators = new List<string>() {"dolar", "euro"};
+
+            if (indicators.Contains(indicator))
+            {
+                if (DateTime.Now.DayOfWeek == DayOfWeek.Saturday)
+                {
+                    this.dateTime = DateTime.Now.AddDays(-1).ToString("dd-MM-yyyy");
+                }
+                else if (DateTime.Now.DayOfWeek == DayOfWeek.Sunday)
+                {
+                    this.dateTime = DateTime.Now.AddDays(-2).ToString("dd-MM-yyyy");
+                }
+                else
+                {
+                    this.dateTime = DateTime.Now.ToString("dd-MM-yyyy");
+                }
             }
         }
 

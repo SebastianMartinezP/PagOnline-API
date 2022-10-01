@@ -83,8 +83,9 @@ namespace PagOnlineAPI.Controllers
                         default:
                             break;
                     }
+                }
 
-                    _context.ComprobantePago.Add(comprobante);
+                _context.ComprobantePago.Add(comprobante);
                 _context.SaveChanges();
 
                 _logger.LogInformation("Comprobante pago generado exitosamente.");
