@@ -6,7 +6,6 @@ using RestSharp;
 using System.Globalization;
 using System.Linq;
 using System.Text.Json;
-
 namespace PagOnlineAPI.Controllers
 {
     [ApiController]
@@ -48,12 +47,15 @@ namespace PagOnlineAPI.Controllers
 
 
         [HttpPost]
-        public string SaveComprobante(DTO.ComprobantePago comprobantePago)
+        public DTO.ComprobantePagoResponse SaveComprobante(DTO.ComprobantePagoRequest comprobantePagoRequest)
         {
             try
             {
-                Models.ComprobantePago comprobante = 
-                    _mapper.Map<DTO.ComprobantePago, Models.ComprobantePago>(comprobantePago);
+                Models.ComprobantePago comprobante =
+                    _mapper.Map<DTO.ComprobantePagoRequest, Models.ComprobantePago>(comprobantePagoRequest);
+
+                comprobante.Fecharegistro = DateTime.Now;
+
 
                 if (comprobante.Tipomoneda != null)
                 {
@@ -70,13 +72,13 @@ namespace PagOnlineAPI.Controllers
 
                         case "utm":
                             data = currency.GetCurrency("utm");
-                            comprobante.Valoruf = (decimal)(data?.value ?? 0);
+                            comprobante.Valorutm = (decimal)(data?.value ?? 0);
                             comprobante.Monto = comprobante.Monto * comprobante.Valorutm;
                             break;
 
                         case "usd":
                             data = currency.GetCurrency("dolar");
-                            comprobante.Valoruf = (decimal)(data?.value ?? 0);
+                            comprobante.Valorusd = (decimal)(data?.value ?? 0);
                             comprobante.Monto = comprobante.Monto * comprobante.Valorusd;
                             break;
 
@@ -90,13 +92,23 @@ namespace PagOnlineAPI.Controllers
 
                 _logger.LogInformation("Comprobante pago generado exitosamente.");
 
-                return "Comprobante pago generado exitosamente.";
+
+                return new ComprobantePagoResponse()
+                {
+                    Idcomprobante = comprobante.Idcomprobante,
+                    MontoPago = comprobante.Monto,
+                    Message = "Comprobante pago generado exitosamente."
+                };
+
 
             }
             catch (Exception e)
             {
                 _logger.LogInformation(e.Message);
-                return e.Message;
+                return new DTO.ComprobantePagoResponse()
+                {
+                    Message = e.Message,
+                };
             }
         }
 

@@ -16,7 +16,7 @@ namespace PagOnlineAPI.Models
         {
         }
 
-        public virtual DbSet<Models.ComprobantePago> ComprobantePago { get; set; } = null!;
+        public virtual DbSet<ComprobantePago> ComprobantePago { get; set; } = null!;
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -36,7 +36,7 @@ namespace PagOnlineAPI.Models
             modelBuilder.HasDefaultSchema("C##SECURITY")
                 .UseCollation("USING_NLS_COMP");
 
-            modelBuilder.Entity<Models.ComprobantePago>(entity =>
+            modelBuilder.Entity<ComprobantePago>(entity =>
             {
                 entity.HasKey(e => e.Idcomprobante)
                     .HasName("SYS_C007679");
@@ -47,6 +47,11 @@ namespace PagOnlineAPI.Models
                     .HasColumnType("NUMBER(38)")
                     .ValueGeneratedOnAdd()
                     .HasColumnName("IDCOMPROBANTE");
+
+                entity.Property(e => e.Cvv)
+                    .HasMaxLength(3)
+                    .IsUnicode(false)
+                    .HasColumnName("CVV");
 
                 entity.Property(e => e.Fecharegistro)
                     .HasColumnType("DATE")
@@ -61,14 +66,15 @@ namespace PagOnlineAPI.Models
                     .HasColumnType("NUMBER(38)")
                     .HasColumnName("MONTO");
 
+                entity.Property(e => e.Nombretitular)
+                    .HasMaxLength(50)
+                    .IsUnicode(false)
+                    .HasColumnName("NOMBRETITULAR");
+
                 entity.Property(e => e.Numerotarjeta)
                     .HasMaxLength(16)
                     .IsUnicode(false)
                     .HasColumnName("NUMEROTARJETA");
-
-                entity.Property(e => e.Pintarjeta)
-                    .HasColumnType("NUMBER(38)")
-                    .HasColumnName("PINTARJETA");
 
                 entity.Property(e => e.Tipomoneda)
                     .HasMaxLength(20)
