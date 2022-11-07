@@ -6,6 +6,7 @@ API de pago simulado con .NET Core y Oracle 18cXE
  - SwaggerUI
  - EntityFramework Oracle
  - Automapper
+ - FluentEmail
  
 ### Importante:
  - Cambiar la ConnectionString en `AppSettings.json`
