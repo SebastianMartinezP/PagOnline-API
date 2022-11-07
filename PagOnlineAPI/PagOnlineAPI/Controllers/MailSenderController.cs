@@ -53,6 +53,31 @@ namespace PagOnlineAPI.Controllers
         }
 
         [HttpPost]
+        public async Task<MailResponse?> SendContractAboutToExpireEmail(string emailFrom, string emailTo, string nameTo, string contractData)
+        {
+            try
+            {
+                string subject = "Contrato por caducar - Security";
+
+                StringBuilder message = new();
+                message.AppendLine(string.Format("<h1>Hola {0},</h1>", nameTo));
+                message.AppendLine("<p> Queremos informarte que tu contrato mensual está a 10 días de caducar. </p>");
+                message.AppendLine(string.Format("<p> Contrato: {0} </p>", contractData));
+                message.AppendLine("<p> Te recomendamos gestionar el pago antes de que caduque. </p>");
+                message.AppendLine(" - Security.");
+
+
+
+                MailResponse? response = await _mailHandler.SendMailAsync(emailFrom, emailTo, nameTo, subject, message.ToString());
+                return response;
+            }
+            catch (Exception)
+            {
+                return new MailResponse();
+            }
+        }
+
+        [HttpPost]
         public async Task<MailResponse?> SendContractExpiredEmail(string emailFrom, string emailTo, string nameTo, string contractData)
         {
             try
