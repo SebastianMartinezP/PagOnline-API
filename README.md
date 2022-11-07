@@ -14,3 +14,6 @@ API de pago simulado con .NET Core y Oracle 18cXE
 ### Integracion con Mindicador.cl (cambio de divisa USD, UTM, UF)
  - Documentacion API: https://mindicador.cl/
 
+### Integracion con envío de correos vía SMTP (ambiente desarrollo)
+ - link del software `PaperCut-SMTP Server`: https://github.com/ChangemakerStudios/Papercut-SMTP
+ - puerto: `25`
