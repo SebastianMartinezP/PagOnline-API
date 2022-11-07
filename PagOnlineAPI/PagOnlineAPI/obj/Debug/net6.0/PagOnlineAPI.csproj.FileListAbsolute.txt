@@ -55,3 +55,5 @@ E:\DUOC\Portafolio\Repositorios\PagOnline API\PagOnlineAPI\PagOnlineAPI\bin\Debu
 E:\DUOC\Portafolio\Repositorios\PagOnline API\PagOnlineAPI\PagOnlineAPI\bin\Debug\net6.0\AutoMapper.dll
 E:\DUOC\Portafolio\Repositorios\PagOnline API\PagOnlineAPI\PagOnlineAPI\bin\Debug\net6.0\AutoMapper.Extensions.Microsoft.DependencyInjection.dll
 E:\DUOC\Portafolio\Repositorios\PagOnline API\PagOnlineAPI\PagOnlineAPI\bin\Debug\net6.0\RestSharp.dll
+E:\DUOC\Portafolio\Repositorios\PagOnline API\PagOnlineAPI\PagOnlineAPI\bin\Debug\net6.0\FluentEmail.Core.dll
+E:\DUOC\Portafolio\Repositorios\PagOnline API\PagOnlineAPI\PagOnlineAPI\bin\Debug\net6.0\FluentEmail.Smtp.dll

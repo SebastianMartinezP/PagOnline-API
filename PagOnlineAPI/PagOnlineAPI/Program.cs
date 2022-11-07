@@ -19,7 +19,7 @@ MapperConfiguration mapperConfig = new MapperConfiguration(mc =>
     mc.AddProfile(new MappingProfile());
 });
 IMapper mapper = mapperConfig.CreateMapper();
-
+builder.Services.AddSingleton<IMailHandler, PaperCutMailHandler>();
 builder.Services.AddSingleton(mapper);
 builder.Services.AddMvc();
 
