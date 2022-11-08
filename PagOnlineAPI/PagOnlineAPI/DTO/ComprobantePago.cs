@@ -37,6 +37,7 @@
         public decimal? Idcomprobante { get; set; }
         public decimal? MontoPago { get; set; }
         public string? Message { get; set; }
+        public DateTime? Fecharegistro { get; set; }
     }
 
 

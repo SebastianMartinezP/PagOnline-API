@@ -97,7 +97,8 @@ namespace PagOnlineAPI.Controllers
                 {
                     Idcomprobante = comprobante.Idcomprobante,
                     MontoPago = comprobante.Monto,
-                    Message = "Comprobante pago generado exitosamente."
+                    Message = "Comprobante pago generado exitosamente.",
+                    Fecharegistro = comprobante.Fecharegistro
                 };
 
 
